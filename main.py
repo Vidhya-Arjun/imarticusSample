@@ -1,12 +1,18 @@
-from Bike import Bike
-from Car import Car
-from Truck import Truck
+from BankAccount import BankAccount
+from SavingsAccount import SavingsAccount
+from CurrentAccount import CurrentAccount
 
 if __name__ == '__main__':
-    bik = Bike("rm5",200,2)
-    car = Car("Ford",500,7)
-    truck = Truck("Mahendra",100,6)
+    BA = BankAccount(123,5000)
+    SA = SavingsAccount(127,3000,5)
+    CA = CurrentAccount(128,500)
 
-vehicle = [bik, car, truck]
-for v in vehicle:
-    print(v)
+accountDetails =[BA, SA, CA]
+for account in accountDetails:
+    print(account)
+
+CA.calculate_minimumbalance()
+SA.applyInterest()
+BA.checkbalance()
+SA.checkbalance()
+CA.checkbalance()
