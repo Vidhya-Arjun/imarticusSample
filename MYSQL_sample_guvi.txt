@@ -1,0 +1,111 @@
+create table movie
+(movie_id bigint, movie_name varchar(200),
+ video_image_reference varchar(200), typeOfmovie varchar(10), 
+ artist_name varchar(100), language varchar(25), 
+ duration timestamp, genere varchar(20),
+ primary key (movie_id)) ;
+Create table Review 
+(Review_id int, Reviewer_name varchar(50),movie_name varchar(200), review_comments varchar(100), rating decimal(2,1))
+
+
+
+
+insert into Review 
+values
+(124,"Arjun","thee", "good",3.7,"Vijay"),
+(125,"Prasanth", "thalapthy","can be watched", 4.8,"Rajni"),
+(126,"Arjun","matrix", "intense",3.7,"Arnold"),
+(127,"Maran", "matrix","can be watched", 2.8,"Arnold"),
+(128,"Arjun","upload", "good",3.6,"Pitsburgh"),
+(129,"Prasanth", "thee","not to be watched", 1.8,"Vijay"),
+(130,"Sachin","matrix", "good",3.7,"Arnold");
+
+
+
+
+
+insert into artist
+ values(184, "Vijay",
+ 10000000, False, 10, 
+ "sura"),
+(185, "Rajini",
+ 15000000, False, 20, 
+ "Thalapathy"),
+(186, "Arnold",
+ 1000000, True, 0, 
+ "matrix");
+
+
+ALTER TABLE movie
+ADD CONSTRAINT chk_FileFormat CHECK (video_image_reference LIKE '%.AVI' OR video_image_reference LIKE '%.MP4',OR video_image_reference LIKE '%.MKV',OR video_image_reference LIKE '%.JPG');
+
+create table artist
+ (artist_reg_id int, artist_name varchar(100),
+ artist_salary bigInt, is_new BIT, 
+ artist_name varchar(100), artist_experience int, 
+ movie_name varchar(200) , 
+ primary key artist(artist_reg_id), foreign key movie(movie_name)) ;
+
+
+
+
+Select genre from movie where =(select movie_name from review where rating > 3.8);
+Alter table review add constraint sk_review foreign key reference movie(movie_name);
+ 
+
+ create table artist
+ (artist_reg_id int, artist_name varchar(100),
+ artist_salary bigInt, is_new BIT, artist_experience int, 
+ movie_name varchar(200), 
+ primary key (artist_reg_id), 
+ foreign key (movie_name) references movie(movie_name));
+
+
+ALTER TABLE movie
+ADD CONSTRAINT chk_FileFormat CHECK (video_image_reference LIKE '%.AVI' OR 
+video_image_reference LIKE '%.MP4'
+OR video_image_reference LIKE '%.MKV'
+OR video_image_reference LIKE '%.JPG');
+
+Insert into  imdb.movie
+values(00001236, "upload",
+ "martin_birth.mp4", "kids", 
+ "Pitsburgh", "English", 
+ '2025-11-05 14:30:00', "comedy"),
+(00001237, "thalapathy",
+ "THee_intro_scene_ref.avi", "U/A", 
+ "Rajini", "tamil", 
+ '1991-11-05 12:30:00', "family");
+
+
+
+insert into artist
+ values(184, "Vijay",
+ 10000000, False, 10, 
+ "Thee"),
+(185, "Rajini",
+ 15000000, False, 20, 
+ "Thalapathy"),
+(186, "Arnold",
+ 1000000, True, 0, 
+ "matrix");
+select * from imdb.movie;
+
+insert into imdb.Review 
+values(123,"Maran", "thee","can be watched", 3.8,"Vijay");
+
+insert into imdb.Review 
+values
+(133,"Maran","upload", "good",3.6,"Pitsburgh");
+(132,"Maran","thalapathy", "intensified",3.7,"Rajini");
+(127,"Maran", "matrix","can be watched", 2.8,"Arnold"),
+(133,"Maran","upload", "good",3.6,"Pitsburgh"),
+(129,"Prasanth", "thee","not to be watched", 1.8,"Vijay"),
+(130,"Sachin","matrix", "good",3.7,"Arnold");
+
+Alter table review add constraint sk_review foreign key (movie_name) references movie(movie_name);
+
+Select genre from imdb.movie where movie_name in (select movie_name from imdb.review where rating > 3.8);
+
+select count(movie_name) , artist_name from imdb.review group by artist_name having avg(rating) < 3.5; 
+
